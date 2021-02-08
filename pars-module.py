@@ -4,6 +4,7 @@ import time
 import random
 import unicodedata
 import re
+from mylinks import mylink
 options = webdriver.ChromeOptions()
 prefs = {"profile.managed_default_content_settings.images": 2}
 options.add_experimental_option("prefs", prefs)
@@ -24,17 +25,14 @@ cur.execute("""CREATE TABLE IF NOT EXISTS vidos(
 """)
 conn.commit()
 
-link_list = ['https://www.youtube.com/results?search_query=handmade',
-             'https://www.youtube.com/results?search_query=diy',
-             'https://www.youtube.com/results?search_query=ideas',
-             'https://www.youtube.com/results?search_query=how+to+make',
-             'https://www.youtube.com/results?search_query=как+сделать',
-             'https://www.youtube.com/results?search_query=своими+руками']
+link_list = [
+    mylink,
+]
 for link in link_list:
     driver.get(link)
     time.sleep(1)
     len_scroll = 3000
-    for i in range(1, 80):
+    for i in range(1, 140):
         driver.execute_script("window.scrollBy(0,{})".format(len_scroll))
         len_scroll += 6000
         time.sleep(1)
